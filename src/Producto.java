@@ -12,13 +12,14 @@ public class Producto {
     }
 
     public Producto(String nombre, double precio, String categoria,
-                    String fechaVencimiento, int cantidad) {
+                    String fechaVencimiento, int cantidad,
+                    ArrayList<String> listaImagenes) {
         this.nombre = nombre;
         this.precio = precio;
         this.categoria = categoria;
         this.fechaVencimiento = fechaVencimiento;
         this.cantidad = cantidad;
-        listaImagenes = new ArrayList<>();
+        this.listaImagenes = listaImagenes;
     }
 
     public String getNombre() {
