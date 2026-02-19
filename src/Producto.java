@@ -1,9 +1,12 @@
+import java.util.ArrayList;
+
 public class Producto {
     private String nombre;
     private double precio;
     private String categoria;
     private String fechaVencimiento;
     private int cantidad;
+    private ArrayList<String> listaImagenes;
 
     public Producto() {
     }
@@ -15,6 +18,7 @@ public class Producto {
         this.categoria = categoria;
         this.fechaVencimiento = fechaVencimiento;
         this.cantidad = cantidad;
+        listaImagenes = new ArrayList<>();
     }
 
     public String getNombre() {
