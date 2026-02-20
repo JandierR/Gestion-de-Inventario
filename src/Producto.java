@@ -8,13 +8,14 @@ public class Producto {
     private int cantidad;
     private ArrayList<String> listaImagenes;
     private Producto siguienteProducto;
+    private int id;
 
     public Producto() {
     }
 
     public Producto(String nombre, double precio, String categoria,
                     String fechaVencimiento, int cantidad,
-                    ArrayList<String> listaImagenes) {
+                    ArrayList<String> listaImagenes, int id) {
         this.nombre = nombre;
         this.precio = precio;
         this.categoria = categoria;
@@ -22,6 +23,7 @@ public class Producto {
         this.cantidad = cantidad;
         this.listaImagenes = listaImagenes;
         this.siguienteProducto = null;
+        this.id = id;
     }
 
     public String getNombre() {
@@ -78,6 +80,14 @@ public class Producto {
 
     public void setSiguienteProducto(Producto siguienteProducto) {
         this.siguienteProducto = siguienteProducto;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     @Override
