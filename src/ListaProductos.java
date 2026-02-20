@@ -1,7 +1,6 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 
 public class ListaProductos {
     //Atributos
@@ -21,42 +20,61 @@ public class ListaProductos {
         return primerProducto == null;
     }
 
-    public void insertarProductoInicio(String nombre, double precio,
-                                       String categoria, String fechaVencimiento,
-                                       int cantidad, ArrayList<String> listaImagenes,
-                                       int id) {
+    public void insertarProductoInicio() throws IOException {
+
+        System.out.print("Nombre del producto: ");
+        String nombre = br.readLine();
+
+        System.out.print("Precio del producto: ");
+        double precio = Double.parseDouble(br.readLine());
+
+        System.out.print("Categoria del producto: ");
+        String categoria = br.readLine();
+
+        System.out.print("Fecha de vencimiento del producto: ");
+        String fechaVencimiento = br.readLine();
+
+        System.out.print("Cantidad del producto: ");
+        int cantidad = Integer.parseInt(br.readLine());
+
+
+
 
         Producto nuevoProducto = new Producto(nombre, precio, categoria,
-                fechaVencimiento, cantidad, listaImagenes, id);
+                fechaVencimiento, cantidad);
         nuevoProducto.setSiguienteProducto(primerProducto);
         setPrimerProducto(nuevoProducto);
 
     }
 
-    public void insertarNodoFinal(String nombre, double precio,
-                                  String categoria, String fechaVencimiento,
-                                  int cantidad, ArrayList<String> listaImagenes,
-                                  int id) {
+//    public void insertarNodoFinal(String nombre, double precio,
+//                                  String categoria, String fechaVencimiento,
+//                                  int cantidad, ArrayList<String> listaImagenes,
+//                                  int id) {
+//
+//        Producto productoInsertar = new Producto(nombre, precio, categoria,
+//                fechaVencimiento, cantidad, listaImagenes);
+//
+//        if (estaVacio()) {
+//            setPrimerProducto(productoInsertar);
+//            return;
+//        }
+//        Producto temp = primerProducto;
+//        while (temp.getSiguienteProducto() != null) {
+//            temp = temp.getSiguienteProducto();
+//        }
+//        temp.setSiguienteProducto(productoInsertar);
+//    }
 
-        Producto productoInsertar = new Producto(nombre, precio, categoria,
-                fechaVencimiento, cantidad, listaImagenes, id);
-
-        if (estaVacio()) {
-            setPrimerProducto(productoInsertar);
-            return;
-        }
-        Producto temp = primerProducto;
-        while (temp.getSiguienteProducto() != null) {
-            temp = temp.getSiguienteProducto();
-        }
-        temp.setSiguienteProducto(productoInsertar);
-    }
-
-    public Producto eliminarNodo(int id) {
+    public Producto eliminarNodo() throws IOException {
         if (estaVacio()) {
             System.out.println("La lista esta vacía.");
             return null;
         }
+
+        System.out.print("Digite el ID del producto a eliminar: ");
+        int id = Integer.parseInt(br.readLine());
+
         Producto productoActual = primerProducto;
         Producto anteriorTemp = productoActual;
         while (productoActual != null && productoActual.getId() != id) {
@@ -73,7 +91,7 @@ public class ListaProductos {
         return productoActual;
     }
 
-    public Producto buscarProducto(int id) {
+    public Producto buscarProducto(int id) throws IOException {
         if (estaVacio()) {
             System.out.println("La lista esta vacía.");
             return null;
@@ -110,14 +128,17 @@ public class ListaProductos {
         }
     }
 
-    public Producto modificarProducto(int id) throws IOException {
+    public Producto modificarProducto() throws IOException {
         if (primerProducto == null) {
             System.out.println("Lista vacía");
             return null;
         }
 
+        System.out.print("Digite el ID del producto a modificar: ");
+        int id = Integer.parseInt(br.readLine());
+
         //buscarProducto busca y retorna el producto con el Id pasado como argumento, por lo que,
-        //Si se encuentra, se retorna a productoModificado.
+        //Si se encuentra, se retorna .
         Producto productoModificado = buscarProducto(id);
 
 
@@ -143,4 +164,6 @@ public class ListaProductos {
         }
         return productoModificado;
     }
+
+
 }

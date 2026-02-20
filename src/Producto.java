@@ -8,14 +8,14 @@ public class Producto {
     private int cantidad;
     private ArrayList<String> listaImagenes;
     private Producto siguienteProducto;
-    private int id;
+    private int id = 0;
 
     public Producto() {
     }
 
     public Producto(String nombre, double precio, String categoria,
                     String fechaVencimiento, int cantidad,
-                    ArrayList<String> listaImagenes, int id) {
+                    ArrayList<String> listaImagenes) {
         this.nombre = nombre;
         this.precio = precio;
         this.categoria = categoria;
@@ -23,7 +23,18 @@ public class Producto {
         this.cantidad = cantidad;
         this.listaImagenes = listaImagenes;
         this.siguienteProducto = null;
-        this.id = id;
+        id++;
+    }
+
+    public Producto(String nombre, double precio, String categoria,
+                    String fechaVencimiento, int cantidad) {
+        this.nombre = nombre;
+        this.precio = precio;
+        this.categoria = categoria;
+        this.fechaVencimiento = fechaVencimiento;
+        this.cantidad = cantidad;
+        this.siguienteProducto = null;
+        id++;
     }
 
     public String getNombre() {
