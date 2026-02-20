@@ -8,10 +8,9 @@ public class Producto {
     private int cantidad;
     private ArrayList<String> listaImagenes;
     private Producto siguienteProducto;
+    private static int contador;
     private int id = 0;
 
-    public Producto() {
-    }
 
     public Producto(String nombre, double precio, String categoria,
                     String fechaVencimiento, int cantidad,
@@ -23,7 +22,7 @@ public class Producto {
         this.cantidad = cantidad;
         this.listaImagenes = listaImagenes;
         this.siguienteProducto = null;
-        id++;
+        this.id = contador++;
     }
 
     public Producto(String nombre, double precio, String categoria,

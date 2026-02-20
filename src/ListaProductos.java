@@ -7,6 +7,10 @@ public class ListaProductos {
     private Producto primerProducto;
     private BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
+    public ListaProductos() {
+        this.primerProducto = null;
+    }
+
     public Producto getPrimerProducto() {
         return primerProducto;
     }
@@ -67,6 +71,7 @@ public class ListaProductos {
 //    }
 
     public Producto eliminarNodo() throws IOException {
+        //Checar si la lista esta vacia
         if (estaVacio()) {
             System.out.println("La lista esta vacía.");
             return null;
@@ -76,18 +81,28 @@ public class ListaProductos {
         int id = Integer.parseInt(br.readLine());
 
         Producto productoActual = primerProducto;
-        Producto anteriorTemp = productoActual;
+        Producto productoAnterior = null;
+
+        //checar que producto actual no sea null y el id del producto no sea igual al ingresado por el usuario
         while (productoActual != null && productoActual.getId() != id) {
-            anteriorTemp = productoActual;
+            productoAnterior = productoActual;
             productoActual = productoActual.getSiguienteProducto();
         }
 
-        if (productoActual != null) {
-            System.out.println("Producto encontrado.");
-            anteriorTemp.setSiguienteProducto(productoActual.getSiguienteProducto());
-        } else {
+        //Si llego hasta el final de la lista, entonces no se encontro
+        if (productoActual == null) {
             System.out.println("Producto no encontrado");
+            return null;
+
         }
+
+        //Checa si el anterior producto es nulo
+        if (productoAnterior == null) {
+            primerProducto = productoActual.getSiguienteProducto();
+        } else {
+            productoAnterior.setSiguienteProducto(productoActual.getSiguienteProducto());
+        }
+            System.out.println("Producto eliminado.");
         return productoActual;
     }
 
