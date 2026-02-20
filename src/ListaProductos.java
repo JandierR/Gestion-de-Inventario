@@ -1,8 +1,12 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 public class ListaProductos {
     //Atributos
     private Producto primerProducto;
+    private BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
     public Producto getPrimerProducto() {
         return primerProducto;
@@ -53,44 +57,90 @@ public class ListaProductos {
             System.out.println("La lista esta vacía.");
             return null;
         }
-        Producto temp = primerProducto;
-        Producto anteriorTemp = temp;
-        while (temp != null && temp.getId() != id) {
-            anteriorTemp = temp;
-            temp = temp.getSiguienteProducto();
+        Producto productoActual = primerProducto;
+        Producto anteriorTemp = productoActual;
+        while (productoActual != null && productoActual.getId() != id) {
+            anteriorTemp = productoActual;
+            productoActual = productoActual.getSiguienteProducto();
         }
 
-        if (temp == null) {
-            System.out.println("Producto no encontrado");
-        } else {
+        if (productoActual != null) {
             System.out.println("Producto encontrado.");
-            anteriorTemp.setSiguienteProducto(temp.getSiguienteProducto());
-
+            anteriorTemp.setSiguienteProducto(productoActual.getSiguienteProducto());
+        } else {
+            System.out.println("Producto no encontrado");
         }
-        return temp;
+        return productoActual;
     }
 
-    public Producto buscarNodo(int id) {
+    public Producto buscarProducto(int id) {
         if (estaVacio()) {
             System.out.println("La lista esta vacía.");
             return null;
         }
 
-        Producto temp = primerProducto;
-        while (temp != null && temp.getId() != id) {
-            temp = temp.getSiguienteProducto();
+        Producto productoActual = primerProducto;
+        while (productoActual != null && productoActual.getId() != id) {
+            productoActual = productoActual.getSiguienteProducto();
         }
-        if (temp == null) {
+        if (productoActual == null) {
             System.out.println("El producto no se encontró en la lista");
             return null;
         }
         System.out.println("El producto se encontró en la lista");
-        return temp;
+        return productoActual;
     }
 
     //Este metodo de mostrarLista tengo que verificar si la pongo aqui o en Main.
     //No se si deben haber dos metodos similares
     public void mostrarLista() {
+        if (primerProducto == null) {
+            System.out.println("Lista vacía");
+            return;
+        }
 
+        Producto productoActual = primerProducto;
+
+        //Recorre mientras producto no sea null, o sea, hasta que llegue al final que es null
+        while (productoActual != null) {
+            System.out.println(productoActual);
+
+            //El siguiente producto
+            productoActual = productoActual.getSiguienteProducto();
+        }
+    }
+
+    public Producto modificarProducto(int id) throws IOException {
+        if (primerProducto == null) {
+            System.out.println("Lista vacía");
+            return null;
+        }
+
+        //buscarProducto busca y retorna el producto con el Id pasado como argumento, por lo que,
+        //Si se encuentra, se retorna a productoModificado.
+        Producto productoModificado = buscarProducto(id);
+
+
+        if (productoModificado != null) {
+
+            System.out.println("Digite los siguientes nuevas modificaciones:");
+            System.out.print("Digite nuevo nombre: ");
+            String nuevoNombre = br.readLine();
+            productoModificado.setNombre(nuevoNombre);
+
+            System.out.print("Digite nuevo precio: ");
+            int nuevoPrecio = Integer.parseInt(br.readLine());
+            productoModificado.setPrecio(nuevoPrecio);
+
+            System.out.print("Digite nueva categoria: ");
+            String nuevaCategoria = br.readLine();
+            productoModificado.setCategoria(nuevaCategoria);
+
+            System.out.print("Digite nueva fecha de vencimiento: ");
+            String nuevaFechaVencimiento = br.readLine();
+            productoModificado.setFechaVencimiento(nuevaFechaVencimiento);
+
+        }
+        return productoModificado;
     }
 }
