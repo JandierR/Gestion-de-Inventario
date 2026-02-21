@@ -8,8 +8,8 @@ public class Producto {
     private int cantidad;
     private ArrayList<String> listaImagenes;
     private Producto siguienteProducto;
-    private static int contador;
-    private int id = 0;
+    private static int contador = 1;
+    private int id;
 
 
     public Producto(String nombre, double precio, String categoria,
@@ -33,7 +33,8 @@ public class Producto {
         this.fechaVencimiento = fechaVencimiento;
         this.cantidad = cantidad;
         this.siguienteProducto = null;
-        id++;
+        this.listaImagenes = new ArrayList<>();
+        this.id = contador++;
     }
 
     public String getNombre() {
@@ -84,6 +85,10 @@ public class Producto {
         this.listaImagenes = listaImagenes;
     }
 
+    public void agregarImagen(String path) {
+        listaImagenes.add(path);
+    }
+
     public Producto getSiguienteProducto() {
         return siguienteProducto;
     }
@@ -102,12 +107,14 @@ public class Producto {
 
     @Override
     public String toString() {
-        return "Producto{" +
-                "nombre='" + nombre + '\'' +
-                ", precio=" + precio +
-                ", categoria='" + categoria + '\'' +
-                ", fechaVencimiento='" + fechaVencimiento + '\'' +
-                ", cantidad=" + cantidad +
-                '}';
+        return "-Producto- -->" +
+                "[Nombre = '" + nombre + '\'' +
+                "]--> [Precio = '" + precio + '\'' +
+                "]--> [cantidad = '" + cantidad + '\'' +
+                "]--> [categoria ='" + categoria + '\'' +
+                "]--> [fecha de vencimiento = '" + fechaVencimiento + '\'' +
+                "]--> [imágenes = '" + getListaImagenes() + '\'' +
+                "]--> [ID = '#" + id + '\'' +
+                ']';
     }
 }

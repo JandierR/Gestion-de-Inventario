@@ -25,6 +25,7 @@ public class Main {
                 2- Eliminar Producto
                 3- Mostrar Lista
                 4- Modificar Producto
+                5- Agregar imagen a producto
                 0- Salir""");
 
 
@@ -40,6 +41,7 @@ public class Main {
             case 2 -> listaProductos.eliminarNodo();
             case 3 -> listaProductos.mostrarLista();
             case 4 -> listaProductos.modificarProducto();
+            case 5 -> listaProductos.agregarImagenProducto();
             case 0 -> System.out.println("Saliendo del sistema...");
             default -> System.out.println("Valor invalido");
         }

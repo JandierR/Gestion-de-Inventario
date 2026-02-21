@@ -41,8 +41,8 @@ public class ListaProductos {
         System.out.print("Cantidad del producto: ");
         int cantidad = Integer.parseInt(br.readLine());
 
-
-
+        System.out.println("Producto insertado exitosamente");
+        System.out.println();
 
         Producto nuevoProducto = new Producto(nombre, precio, categoria,
                 fechaVencimiento, cantidad);
@@ -102,7 +102,8 @@ public class ListaProductos {
         } else {
             productoAnterior.setSiguienteProducto(productoActual.getSiguienteProducto());
         }
-            System.out.println("Producto eliminado.");
+        System.out.println("Producto eliminado.");
+        System.out.println();
         return productoActual;
     }
 
@@ -163,25 +164,80 @@ public class ListaProductos {
 
         if (productoModificado != null) {
 
-            System.out.println("Digite los siguientes nuevas modificaciones:");
-            System.out.print("Digite nuevo nombre: ");
-            String nuevoNombre = br.readLine();
-            productoModificado.setNombre(nuevoNombre);
+            System.out.println("""
+                    Digite que desea modificar:
+                    -1. Nombre
+                    -2. Precio
+                    -3. Categoria
+                    -4. Fecha de vencimiento
+                    -5. Cantidad
+                    -0. Salir""");
 
-            System.out.print("Digite nuevo precio: ");
-            int nuevoPrecio = Integer.parseInt(br.readLine());
-            productoModificado.setPrecio(nuevoPrecio);
+            int opcion = Integer.parseInt(br.readLine());
 
-            System.out.print("Digite nueva categoria: ");
-            String nuevaCategoria = br.readLine();
-            productoModificado.setCategoria(nuevaCategoria);
+            if (opcion == 1) {
 
-            System.out.print("Digite nueva fecha de vencimiento: ");
-            String nuevaFechaVencimiento = br.readLine();
-            productoModificado.setFechaVencimiento(nuevaFechaVencimiento);
+                System.out.println("Digite los siguientes nuevas modificaciones:");
+                System.out.print("Digite nuevo nombre: ");
+                String nuevoNombre = br.readLine();
+                productoModificado.setNombre(nuevoNombre);
+                System.out.println();
 
+            } else if (opcion == 2) {
+
+                System.out.print("Digite nuevo precio: ");
+                int nuevoPrecio = Integer.parseInt(br.readLine());
+                productoModificado.setPrecio(nuevoPrecio);
+                System.out.println();
+
+            } else if (opcion == 3) {
+
+                System.out.print("Digite nueva categoria: ");
+                String nuevaCategoria = br.readLine();
+                productoModificado.setCategoria(nuevaCategoria);
+                System.out.println();
+            } else if (opcion == 4) {
+                System.out.print("Digite nueva fecha de vencimiento: ");
+                String nuevaFechaVencimiento = br.readLine();
+                productoModificado.setFechaVencimiento(nuevaFechaVencimiento);
+                System.out.println();
+
+            } else if (opcion == 5) {
+                System.out.print("Digite nueva cantidad: ");
+                int nuevaCantidad = Integer.parseInt(br.readLine());
+                productoModificado.setCantidad(nuevaCantidad);
+                System.out.println();
+
+            } else if (opcion == 0) {
+                System.out.println("Saliendo de menu...");
+                System.out.println();
+
+                return null;
+            } else {
+                System.out.println("Opción invalida!");
+                System.out.println();
+
+                return null;
+            }
+            System.out.println("Producto modificado");
         }
         return productoModificado;
+    }
+
+    public void agregarImagenProducto() throws IOException {
+
+        System.out.print("Digite el id de producto que deseas agregar la imagen: ");
+        int id = Integer.parseInt(br.readLine());
+
+        Producto producto = buscarProducto(id);
+
+        if (producto == null) {
+            return;
+        }
+
+        System.out.print("Digite el path de la imagen: ");
+        String path = br.readLine();
+        producto.agregarImagen(path);
     }
 
 
