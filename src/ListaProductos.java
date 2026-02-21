@@ -138,6 +138,10 @@ public class ListaProductos {
         while (productoActual != null) {
             System.out.println(productoActual);
 
+            //Lo siguiente permite imprimir el valor total en productos
+            System.out.println("Precio total del producto $" + productoActual.getPrecio() * productoActual.getCantidad());
+            System.out.println();
+
             //El siguiente producto
             productoActual = productoActual.getSiguienteProducto();
         }
