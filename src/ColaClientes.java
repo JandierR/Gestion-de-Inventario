@@ -3,13 +3,13 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class ColaClientes {
-    private NodoCola frente;
+    private static NodoCola frente;
 
     public ColaClientes() {
         frente = null;
     }
 
-    public boolean estaVacio() {
+    public static boolean estaVacio() {
         return frente == null;
     }
 
@@ -77,7 +77,7 @@ public class ColaClientes {
                 " con prioridad = " + clienteNuevo.getPrioridad() + " fue agregado exitosamente!");
     }
 
-    public void atenderCliente() {
+    public static void atenderCliente() {
         if (estaVacio()) {
             System.out.println("La cola clientes esta vacia!");
             return;
@@ -85,5 +85,7 @@ public class ColaClientes {
         Cliente cliente = frente.cliente;
         frente = frente.siguiente;
         System.out.println("Se atendió al cliente " + cliente.getNombre() + " con prioridad = " + cliente.getPrioridad());
+
+        ListaProductos.mostrarFactura(cliente);
     }
 }
