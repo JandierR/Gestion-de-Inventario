@@ -21,21 +21,46 @@ public class ColaClientes {
         System.out.print("Ingrese el nombre del cliente: ");
         String nombre = br.readLine();
 
-        System.out.print("Ingrese el nombre del cliente: ");
+        System.out.print("Ingrese la prioridad del cliente: ");
         int prioridad= Integer.parseInt(br.readLine());
 
+
         Cliente clienteNuevo = new Cliente(nombre, prioridad);
+
+        /*El siguiente codigo lo cree para no tener que preguntar al cliente los productos...
+         que desea y asi enforcarme en los requerimientos principales de la consigna */
+
+        //A continuacion creo productos random
+        Producto producto1 = new Producto("Leche", 5, "Lacteo", "23/05/3423", 10);
+        Producto producto2 = new Producto("Bistec de res", 9, "Carne", "06/12/3423", 3);
+        Producto producto3 = new Producto("Arroz", 3, "Granel", "09/05/3423", 7);
+
+        //Crep una instancia de lista productos que me servira de puente para pasar los productos hacia el carrito
+        ListaProductos listaProductos = new ListaProductos();
+
+        //Cree un producto unico para resolver este problema, insertarProducto(Producto producto)
+        listaProductos.insertarProducto(producto1);
+        listaProductos.insertarProducto(producto2);
+        listaProductos.insertarProducto(producto3);
+
+        //Despues de crear y agregar los productos a una ListaProductos, puedo finalmente
+        //ingresar esta lista al carrito del cliente para tener productos default.
+        clienteNuevo.setCarrito(listaProductos);
 
         NodoCola nuevoCliente = new NodoCola(clienteNuevo);
 
         if (estaVacio()) {
             frente = nuevoCliente;
+            System.out.println("Cliente '" + clienteNuevo.getNombre() +
+                    " con prioridad = " + clienteNuevo.getPrioridad() + " fue agregado exitosamente!");
             return;
         }
 
-        if (clienteNuevo.getPrioridad() > frente.cliente.getPrioridad()) {
+        if (clienteNuevo.getPrioridad() < frente.cliente.getPrioridad()) {
             nuevoCliente.siguiente = frente;
             frente = nuevoCliente;
+            System.out.println("Cliente '" + clienteNuevo.getNombre() +
+                    " con prioridad = " + clienteNuevo.getPrioridad() + " fue agregado exitosamente!");
             return;
         }
 
@@ -43,20 +68,22 @@ public class ColaClientes {
 
         while (nodoActual.siguiente != null
                 && nodoActual.siguiente.cliente.getPrioridad()
-                >= clienteNuevo.getPrioridad()) {
+                <= clienteNuevo.getPrioridad()) {
             nodoActual = nodoActual.siguiente;
         }
         nuevoCliente.siguiente = nodoActual.siguiente;
         nodoActual.siguiente = nuevoCliente;
+        System.out.println("Cliente '" + clienteNuevo.getNombre() +
+                " con prioridad = " + clienteNuevo.getPrioridad() + " fue agregado exitosamente!");
     }
 
-    public Cliente atenderCliente() {
+    public void atenderCliente() {
         if (estaVacio()) {
             System.out.println("La cola clientes esta vacia!");
-            return null;
+            return;
         }
         Cliente cliente = frente.cliente;
         frente = frente.siguiente;
-        return cliente;
+        System.out.println("Se atendió al cliente " + cliente.getNombre() + " con prioridad = " + cliente.getPrioridad());
     }
 }
