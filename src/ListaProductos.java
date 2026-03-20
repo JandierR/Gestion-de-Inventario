@@ -1,6 +1,7 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 
 public class ListaProductos {
     //Atributos
@@ -57,24 +58,24 @@ public class ListaProductos {
 
     }
 
-//    public void insertarNodoFinal(String nombre, double precio,
-//                                  String categoria, String fechaVencimiento,
-//                                  int cantidad, ArrayList<String> listaImagenes,
-//                                  int id) {
-//
-//        Producto productoInsertar = new Producto(nombre, precio, categoria,
-//                fechaVencimiento, cantidad, listaImagenes);
-//
-//        if (estaVacio()) {
-//            setPrimerProducto(productoInsertar);
-//            return;
-//        }
-//        Producto temp = primerProducto;
-//        while (temp.getSiguienteProducto() != null) {
-//            temp = temp.getSiguienteProducto();
-//        }
-//        temp.setSiguienteProducto(productoInsertar);
-//    }
+    public void insertarNodoFinal(String nombre, double precio,
+                                  String categoria, String fechaVencimiento,
+                                  int cantidad, ArrayList<String> listaImagenes,
+                                  int id) {
+
+        Producto productoInsertar = new Producto(nombre, precio, categoria,
+                fechaVencimiento, cantidad, listaImagenes);
+
+        if (estaVacio()) {
+            setPrimerProducto(productoInsertar);
+            return;
+        }
+        Producto temp = primerProducto;
+        while (temp.getSiguienteProducto() != null) {
+            temp = temp.getSiguienteProducto();
+        }
+        temp.setSiguienteProducto(productoInsertar);
+    }
 
     public Producto eliminarNodo() throws IOException {
         //Checar si la lista esta vacia
