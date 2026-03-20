@@ -45,27 +45,24 @@ public class ArbolProductos {
         BufferedReader br = new BufferedReader(
                 new InputStreamReader(System.in));
 
-        System.out.print("Ingrese el nombre del producto: ");
-        String nombre = br.readLine();
 
-        System.out.print("Ingrese el precio del producto: ");
-        double precio = Double.parseDouble(br.readLine());
 
-        System.out.print("Ingrese la categoria del producto: ");
-        String categoria = br.readLine();
 
-        System.out.print("Ingrese la fecha de vencimiento del producto: ");
-        String fechaVencimiento = br.readLine();
+        System.out.print("Ingrese el #ID del producto: ");
+        int id = Integer.parseInt(br.readLine());
 
-        System.out.print("Ingrese la cantidad del producto: ");
-        int cantidad = Integer.parseInt(br.readLine());
 
-        Producto nuevoProducto = new Producto(nombre, precio, categoria,
-                fechaVencimiento, cantidad);
+
+        Producto nuevoProducto = ListaProductos.buscarProducto(id);
+
+        if (nuevoProducto == null) {
+            System.out.println("No existe tal producto!");
+            System.out.println();
+            return;
+        }
 
         if (estaVacio()) {
             raiz = nuevoProducto;
-            return;
         }
 
         Producto temp = raiz;
