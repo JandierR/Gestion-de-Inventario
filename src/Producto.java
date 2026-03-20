@@ -11,6 +11,10 @@ public class Producto {
     private static int contador = 1;
     private int id;
 
+    private Producto izquierda;
+    private Producto derecha;
+
+
 
     public Producto(String nombre, double precio, String categoria,
                     String fechaVencimiento, int cantidad,
@@ -23,7 +27,10 @@ public class Producto {
         this.listaImagenes = listaImagenes;
         this.siguienteProducto = null;
         this.id = contador++;
+        this.izquierda = this.derecha = null;
     }
+
+
 
     public Producto(String nombre, double precio, String categoria,
                     String fechaVencimiento, int cantidad) {
@@ -35,6 +42,23 @@ public class Producto {
         this.siguienteProducto = null;
         this.listaImagenes = new ArrayList<>();
         this.id = contador++;
+        this.izquierda = this.derecha = null;
+    }
+
+    public Producto getIzquierda() {
+        return izquierda;
+    }
+
+    public void setIzquierda(Producto izquierda) {
+        this.izquierda = izquierda;
+    }
+
+    public Producto getDerecha() {
+        return derecha;
+    }
+
+    public void setDerecha(Producto derecha) {
+        this.derecha = derecha;
     }
 
     public String getNombre() {
