@@ -5,6 +5,8 @@ import java.io.InputStreamReader;
 public class Main {
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     static ListaProductos listaProductos = new ListaProductos();
+    static Tienda tienda = new Tienda();
+    static ColaClientes colaClientes = new ColaClientes();
 
     public static void main(String[] args) throws IOException {
         int opcion;
@@ -26,6 +28,9 @@ public class Main {
                 3- Mostrar Lista
                 4- Modificar Producto
                 5- Agregar imagen a producto
+                6- Insertar producto al inventario
+                7- Insertar cliente a la cola
+                8- Atender cliente
                 0- Salir""");
 
 
@@ -42,6 +47,9 @@ public class Main {
             case 3 -> listaProductos.mostrarLista();
             case 4 -> listaProductos.modificarProducto();
             case 5 -> listaProductos.agregarImagenProducto();
+            case 6 -> tienda.agregarProducto();
+            case 7 -> colaClientes.insertarCliente();
+            case 8 -> colaClientes.atenderCliente();
             case 0 -> System.out.println("Saliendo del sistema...");
             default -> System.out.println("Valor invalido");
         }
