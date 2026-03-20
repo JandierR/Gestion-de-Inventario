@@ -31,6 +31,7 @@ public class Main {
                 6- Insertar producto al inventario
                 7- Insertar cliente a la cola
                 8- Atender cliente
+                9- Insertar nodo final
                 0- Salir""");
         System.out.println();
 
@@ -50,6 +51,7 @@ public class Main {
             case 6 -> tienda.agregarProducto();
             case 7 -> colaClientes.insertarCliente();
             case 8 -> ColaClientes.atenderCliente();
+            case 9 -> listaProductos.insertarProductoFinal();
             case 0 -> System.out.println("Saliendo del sistema...");
             default -> System.out.println("Valor invalido");
         }

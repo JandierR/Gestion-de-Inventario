@@ -1,7 +1,6 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 
 public class ListaProductos {
     //Atributos
@@ -58,23 +57,38 @@ public class ListaProductos {
 
     }
 
-    public void insertarNodoFinal(String nombre, double precio,
-                                  String categoria, String fechaVencimiento,
-                                  int cantidad, ArrayList<String> listaImagenes,
-                                  int id) {
+    public void insertarProductoFinal() throws IOException {
 
-        Producto productoInsertar = new Producto(nombre, precio, categoria,
-                fechaVencimiento, cantidad, listaImagenes);
+        System.out.print("Nombre del producto: ");
+        String nombre = br.readLine();
+
+        System.out.print("Precio del producto: ");
+        double precio = Double.parseDouble(br.readLine());
+
+        System.out.print("Categoria del producto: ");
+        String categoria = br.readLine();
+
+        System.out.print("Fecha de vencimiento del producto: ");
+        String fechaVencimiento = br.readLine();
+
+        System.out.print("Cantidad del producto: ");
+        int cantidad = Integer.parseInt(br.readLine());
+
+        System.out.println("Producto insertado exitosamente");
+        System.out.println();
+
+        Producto nuevoProducto = new Producto(nombre, precio, categoria,
+                fechaVencimiento, cantidad);
 
         if (estaVacio()) {
-            setPrimerProducto(productoInsertar);
+            setPrimerProducto(nuevoProducto);
             return;
         }
         Producto temp = primerProducto;
         while (temp.getSiguienteProducto() != null) {
             temp = temp.getSiguienteProducto();
         }
-        temp.setSiguienteProducto(productoInsertar);
+        temp.setSiguienteProducto(nuevoProducto);
     }
 
     public Producto eliminarNodo() throws IOException {
