@@ -27,15 +27,15 @@ public class ColaClientes {
 
         Cliente clienteNuevo = new Cliente(nombre, prioridad);
 
-        /*El siguiente codigo lo cree para no tener que preguntar al cliente los productos...
+        /*El siguiente código lo cree para no tener que preguntar al usuario los productos...
          que desea y asi enforcarme en los requerimientos principales de la consigna */
 
-        //A continuacion creo productos random
+        //A continuación creo productos random
         Producto producto1 = new Producto("Leche", 5, "Lacteo", "23/05/3423", 10);
         Producto producto2 = new Producto("Bistec de res", 9, "Carne", "06/12/3423", 3);
         Producto producto3 = new Producto("Arroz", 3, "Granel", "09/05/3423", 7);
 
-        //Crep una instancia de lista productos que me servira de puente para pasar los productos hacia el carrito
+        //Crep una instancia de lista productos que me servirá de puente para pasar los productos hacia el carrito
         ListaProductos listaProductos = new ListaProductos();
 
         //Cree un producto unico para resolver este problema, insertarProducto(Producto producto)
@@ -43,7 +43,7 @@ public class ColaClientes {
         listaProductos.insertarProducto(producto2);
         listaProductos.insertarProducto(producto3);
 
-        //Despues de crear y agregar los productos a una ListaProductos, puedo finalmente
+        //Después de crear y agregar los productos a una ListaProductos, puedo finalmente
         //ingresar esta lista al carrito del cliente para tener productos default.
         clienteNuevo.setCarrito(listaProductos);
 
