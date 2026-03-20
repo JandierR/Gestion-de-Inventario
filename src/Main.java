@@ -20,7 +20,7 @@ public class Main {
     }
 
     public static void imprimirMenu() {
-
+        System.out.println();
         System.out.println("""
                       --Menu--
                 1- Agregar Producto
@@ -32,7 +32,7 @@ public class Main {
                 7- Insertar cliente a la cola
                 8- Atender cliente
                 0- Salir""");
-
+        System.out.println();
 
     }
 
@@ -49,7 +49,7 @@ public class Main {
             case 5 -> listaProductos.agregarImagenProducto();
             case 6 -> tienda.agregarProducto();
             case 7 -> colaClientes.insertarCliente();
-            case 8 -> colaClientes.atenderCliente();
+            case 8 -> ColaClientes.atenderCliente();
             case 0 -> System.out.println("Saliendo del sistema...");
             default -> System.out.println("Valor invalido");
         }
