@@ -131,33 +131,34 @@ public class ListaProductos {
         return productoActual;
     }
 
-    //Este metodo de mostrarLista tengo que verificar si la pongo aqui o en Main.
-    //No se si deben haber dos metodos similares
-    public double mostrarFactura() {
+
+    public static void mostrarFactura(Cliente cliente) {
         if (primerProducto == null) {
             System.out.println("Lista vacía");
-            return -1;
+            return;
         }
 
-        Producto productoActual = primerProducto;
-        double total = 0;
+        ListaProductos listaProductos = cliente.getCarrito();
+
+        Producto productoActual = listaProductos.getPrimerProducto();
+        double totalCarrito = 0;
+        double precioTotal = 0;
+
         //Recorre mientras producto no sea null, o sea, hasta que llegue al final que es null
         while (productoActual != null) {
             System.out.println(productoActual);
 
             //Lo siguiente permite imprimir el valor total en productos
-//            System.out.println("Precio total del producto $" + productoActual.getPrecio() * productoActual.getCantidad());
-            total = productoActual.getPrecio() * productoActual.getCantidad();
+            precioTotal = productoActual.getPrecio() * productoActual.getCantidad();
+            totalCarrito += precioTotal;
 
-            //Tambien imprime informacion del producto
-            System.out.println(productoActual.getNombre());
-            System.out.println(productoActual.getCantidad());
-            System.out.println(productoActual.getPrecio());
 
             //El siguiente producto
             productoActual = productoActual.getSiguienteProducto();
         }
-        return total;
+
+        System.out.println("El total es = $" + totalCarrito);
+
     }
 
     public void mostrarLista() {
@@ -172,11 +173,6 @@ public class ListaProductos {
         System.out.println("----Lista----");
         while (productoActual != null) {
             System.out.println(productoActual);
-
-//            System.out.println("Nombre del producto = " + productoActual.getNombre());
-//            System.out.println("Cantidad = " + productoActual.getCantidad());
-//            System.out.println("Precio del producto = $" + productoActual.getPrecio());
-
 
             //El siguiente producto
             productoActual = productoActual.getSiguienteProducto();
