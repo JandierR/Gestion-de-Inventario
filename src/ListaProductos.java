@@ -4,12 +4,13 @@ import java.io.InputStreamReader;
 
 public class ListaProductos {
     //Atributos
-    private Producto primerProducto;
+    private static Producto  primerProducto;
     private BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
     public ListaProductos() {
         this.primerProducto = null;
     }
+
 
     public Producto getPrimerProducto() {
         return primerProducto;
@@ -20,8 +21,13 @@ public class ListaProductos {
     }
 
     //Revisa si el nuevoProducto que se paso, esta vacio, o sea, null.
-    private boolean estaVacio() {
+    private static boolean estaVacio() {
         return primerProducto == null;
+    }
+
+    public void insertarProducto(Producto producto) {
+        producto.setSiguienteProducto(primerProducto);
+        setPrimerProducto(producto);
     }
 
     public void insertarProductoInicio() throws IOException {
@@ -107,7 +113,7 @@ public class ListaProductos {
         return productoActual;
     }
 
-    public Producto buscarProducto(int id) throws IOException {
+    public static Producto buscarProducto(int id) throws IOException {
         if (estaVacio()) {
             System.out.println("La lista esta vacía.");
             return null;
@@ -127,25 +133,55 @@ public class ListaProductos {
 
     //Este metodo de mostrarLista tengo que verificar si la pongo aqui o en Main.
     //No se si deben haber dos metodos similares
-    public void mostrarLista() {
+    public double mostrarFactura() {
         if (primerProducto == null) {
             System.out.println("Lista vacía");
-            return;
+            return -1;
         }
 
         Producto productoActual = primerProducto;
-
+        double total = 0;
         //Recorre mientras producto no sea null, o sea, hasta que llegue al final que es null
         while (productoActual != null) {
             System.out.println(productoActual);
 
             //Lo siguiente permite imprimir el valor total en productos
-            System.out.println("Precio total del producto $" + productoActual.getPrecio() * productoActual.getCantidad());
-            System.out.println();
+//            System.out.println("Precio total del producto $" + productoActual.getPrecio() * productoActual.getCantidad());
+            total = productoActual.getPrecio() * productoActual.getCantidad();
+
+            //Tambien imprime informacion del producto
+            System.out.println(productoActual.getNombre());
+            System.out.println(productoActual.getCantidad());
+            System.out.println(productoActual.getPrecio());
 
             //El siguiente producto
             productoActual = productoActual.getSiguienteProducto();
         }
+        return total;
+    }
+
+    public void mostrarLista() {
+        if (primerProducto == null) {
+            System.out.println("Lista vacía");
+            return ;
+        }
+
+        Producto productoActual = primerProducto;
+        //Recorre mientras producto no sea null, o sea, hasta que llegue al final que es null
+
+        System.out.println("----Lista----");
+        while (productoActual != null) {
+            System.out.println(productoActual);
+
+//            System.out.println("Nombre del producto = " + productoActual.getNombre());
+//            System.out.println("Cantidad = " + productoActual.getCantidad());
+//            System.out.println("Precio del producto = $" + productoActual.getPrecio());
+
+
+            //El siguiente producto
+            productoActual = productoActual.getSiguienteProducto();
+        }
+        System.out.println();
     }
 
     public Producto modificarProducto() throws IOException {
@@ -239,6 +275,7 @@ public class ListaProductos {
         String path = br.readLine();
         producto.agregarImagen(path);
     }
+
 
 
 }
