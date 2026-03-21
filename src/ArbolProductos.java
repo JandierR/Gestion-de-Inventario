@@ -28,6 +28,10 @@ public class ArbolProductos {
 
         Producto productoTemp = raiz;
 
+        if (productoTemp == null) {
+            return null;
+        }
+
         while (productoTemp.getId() != id) {
             if (productoTemp.getId() > id) productoTemp = productoTemp.getIzquierda();
             else productoTemp = productoTemp.getDerecha();
@@ -63,6 +67,7 @@ public class ArbolProductos {
 
         if (estaVacio()) {
             raiz = nuevoProducto;
+            return;
         }
 
         Producto temp = raiz;

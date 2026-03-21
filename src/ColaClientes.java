@@ -4,6 +4,8 @@ import java.io.InputStreamReader;
 
 public class ColaClientes {
     private static NodoCola frente;
+    private BufferedReader br = new BufferedReader(
+            new InputStreamReader(System.in));
 
     public ColaClientes() {
         frente = null;
@@ -15,8 +17,7 @@ public class ColaClientes {
 
 
     public void insertarCliente() throws IOException {
-        BufferedReader br = new BufferedReader(
-                new InputStreamReader(System.in));
+
 
         System.out.print("Ingrese el nombre del cliente: ");
         String nombre = br.readLine();
@@ -27,40 +28,61 @@ public class ColaClientes {
 
         Cliente clienteNuevo = new Cliente(nombre, prioridad);
 
-        /*El siguiente código lo cree para no tener que preguntar al usuario los productos...
-         que desea y asi enforcarme en los requerimientos principales de la consigna */
+        int opcion;
 
-        //A continuación creo productos random
-        Producto producto1 = new Producto("Leche", 5, "Lacteo", "23/05/3423", 10);
-        Producto producto2 = new Producto("Bistec de res", 9, "Carne", "06/12/3423", 3);
-        Producto producto3 = new Producto("Arroz", 3, "Granel", "09/05/3423", 7);
+        System.out.println();
+        System.out.println("Comprando productos...");
+        do {
+            System.out.print("Ingresar #ID del producto: ");
+            int id = Integer.parseInt(br.readLine());
 
-        //Crep una instancia de lista productos que me servirá de puente para pasar los productos hacia el carrito
-        ListaProductos listaProductos = new ListaProductos();
+            Producto productoInventario = Tienda.arbolProductos.buscarProducto(id);
 
-        //Cree un producto unico para resolver este problema, insertarProducto(Producto producto)
-        listaProductos.insertarProducto(producto1);
-        listaProductos.insertarProducto(producto2);
-        listaProductos.insertarProducto(producto3);
+            if (productoInventario != null) {
+                System.out.print("Ingrese cantidad que desea comprar: ");
+                int cantidad = Integer.parseInt(br.readLine());
 
-        //Después de crear y agregar los productos a una ListaProductos, puedo finalmente
-        //ingresar esta lista al carrito del cliente para tener productos default.
-        clienteNuevo.setCarrito(listaProductos);
+
+                Producto productoCarrito = new Producto(
+                        productoInventario.getNombre(),
+                        productoInventario.getPrecio(),
+                        productoInventario.getCategoria(),
+                        productoInventario.getFechaVencimiento(),
+                        cantidad,
+                        productoInventario.getId()
+                );
+                clienteNuevo.getCarrito().insertarProducto(productoCarrito);
+
+                System.out.println("El producto se ha agregado al carrito.");
+            } else {
+                //Aqui tengo que retornar porque si no, aunque no exista el producto,
+                // la instancia del cliente creado se guarda si no retorno.
+                System.out.println("El producto no existe!");
+                return;
+            }
+
+            System.out.println();
+            System.out.println("""
+                    ¿Agregar otro producto?
+                    -1. Si
+                    -2. No""");
+            opcion = Integer.parseInt(br.readLine());
+
+        } while (opcion != 2);
 
         NodoCola nuevoCliente = new NodoCola(clienteNuevo);
 
         if (estaVacio()) {
             frente = nuevoCliente;
-            System.out.println("Cliente '" + clienteNuevo.getNombre() +
-                    " con prioridad = " + clienteNuevo.getPrioridad() + " fue agregado exitosamente!");
+            imprimirDatosCliente(clienteNuevo);
+
             return;
         }
 
         if (clienteNuevo.getPrioridad() < frente.cliente.getPrioridad()) {
             nuevoCliente.siguiente = frente;
             frente = nuevoCliente;
-            System.out.println("Cliente '" + clienteNuevo.getNombre() +
-                    " con prioridad = " + clienteNuevo.getPrioridad() + " fue agregado exitosamente!");
+            imprimirDatosCliente(clienteNuevo);
             return;
         }
 
@@ -73,8 +95,18 @@ public class ColaClientes {
         }
         nuevoCliente.siguiente = nodoActual.siguiente;
         nodoActual.siguiente = nuevoCliente;
+        imprimirDatosCliente(clienteNuevo);
+    }
+
+    private void imprimirDatosCliente(Cliente clienteNuevo) {
         System.out.println("Cliente '" + clienteNuevo.getNombre() +
                 " con prioridad = " + clienteNuevo.getPrioridad() + " fue agregado exitosamente!");
+        Producto productoCliente = clienteNuevo.getCarrito().getPrimerProducto();
+        System.out.println("Productos comprados -->");
+        while (productoCliente != null) {
+            System.out.println(productoCliente);
+            productoCliente = productoCliente.getSiguienteProducto();
+        }
     }
 
     public static void atenderCliente() {

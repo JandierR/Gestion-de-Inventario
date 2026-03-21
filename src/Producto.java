@@ -45,6 +45,19 @@ public class Producto {
         this.izquierda = this.derecha = null;
     }
 
+    public Producto(String nombre, double precio, String categoria,
+                    String fechaVencimiento, int cantidad, int id) {
+        this.nombre = nombre;
+        this.precio = precio;
+        this.categoria = categoria;
+        this.fechaVencimiento = fechaVencimiento;
+        this.cantidad = cantidad;
+        this.siguienteProducto = null;
+        this.listaImagenes = new ArrayList<>();
+        this.id = id;
+        this.izquierda = this.derecha = null;
+    }
+
     public Producto getIzquierda() {
         return izquierda;
     }

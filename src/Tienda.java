@@ -1,7 +1,7 @@
 import java.io.IOException;
 
 public class Tienda {
-    private ArbolProductos arbolProductos;
+    static ArbolProductos arbolProductos;
     private ColaClientes colaClientes;
 
     public Tienda() {
