@@ -25,8 +25,11 @@ public class ColaClientes {
         System.out.print("Ingrese la prioridad del cliente: ");
         int prioridad= Integer.parseInt(br.readLine());
 
+        System.out.print("Ingrese la ubicación del cliente: ");
+        String ubicacion = br.readLine();
 
-        Cliente clienteNuevo = new Cliente(nombre, prioridad);
+
+        Cliente clienteNuevo = new Cliente(nombre, prioridad, ubicacion);
 
         int opcion;
 
@@ -109,15 +112,32 @@ public class ColaClientes {
         }
     }
 
-    public static void atenderCliente() {
+    public static void atenderCliente(Grafo grafo, String ubicacionTienda) {
         if (estaVacio()) {
-            System.out.println("La cola clientes esta vacia!");
+            System.out.println("La cola clientes esta vacía!");
             return;
         }
+
         Cliente cliente = frente.cliente;
+        String destino = cliente.getUbicacion();
+
+        if (!grafo.existeCamino(ubicacionTienda, destino)) {
+            System.out.println("No sé puede atender al cliente " + cliente.getNombre());
+            System.out.println("Ubicación desconectada del mapa");
+            return;
+        }
+
         frente = frente.siguiente;
+
+        System.out.println();
         System.out.println("Se atendió al cliente " + cliente.getNombre() + " con prioridad = " + cliente.getPrioridad());
 
+        System.out.println();
+        System.out.println("---FACTURA---");
         ListaProductos.mostrarFactura(cliente);
+
+        System.out.println();
+        System.out.println("---RUTA DE ENTREGA---");
+        grafo.calcularRuta(ubicacionTienda, destino);
     }
 }
