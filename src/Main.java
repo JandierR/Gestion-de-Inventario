@@ -7,7 +7,6 @@ public class Main {
     static ListaProductos listaProductos = new ListaProductos();
     static Tienda tienda = new Tienda("MasXMenos");
     static ColaClientes colaClientes = new ColaClientes();
-
     public static void main(String[] args) throws IOException {
 
 
@@ -36,6 +35,7 @@ public class Main {
                 9- Insertar nodo final
                 10- Agregar conexion
                 11- Agregar ubicacion
+                12- Mostrar grafo
                 0- Salir""");
         System.out.println();
 
@@ -58,6 +58,7 @@ public class Main {
             case 9 -> listaProductos.insertarProductoFinal();
             case 10 -> tienda.agregarArista();
             case 11 -> tienda.agregarVertice();
+            case 12 -> tienda.getMapa().mostrarGrafo();
             case 0 -> System.out.println("Saliendo del sistema...");
             default -> System.out.println("Valor invalido");
         }

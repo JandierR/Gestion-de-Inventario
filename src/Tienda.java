@@ -15,10 +15,10 @@ public class Tienda {
         mapa = new Grafo();
         this.ubicacion = ubicacion;
 
-        mapa.agregarArista(ubicacion, "San José", 11);
-        mapa.agregarArista("San José", "Heredia", 10);
+        mapa.agregarArista(ubicacion, "San Jose", 11);
+        mapa.agregarArista("San Jose", "Heredia", 10);
         mapa.agregarArista("Heredia", "Alajuela", 23);
-        mapa.agregarArista("San José", "Cartago", 39);
+        mapa.agregarArista("San Jose", "Cartago", 39);
     }
 
     public void agregarCliente() throws IOException {

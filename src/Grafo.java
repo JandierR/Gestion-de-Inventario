@@ -90,4 +90,31 @@ public class Grafo {
 
         return distancias.get(destino) != Integer.MAX_VALUE;
     }
+
+    public void mostrarGrafo() {
+        if (listaAdyacencia.isEmpty()) {
+            System.out.println("El mapa está vacío");
+            return;
+        }
+
+        System.out.println();
+        System.out.println("---Mapa de Rutas---");
+        for (Map.Entry<String, List<Arista>> entry : listaAdyacencia.entrySet()) {
+
+            String origen = entry.getKey();
+            List<Arista> conexiones = entry.getValue();
+
+            System.out.println();
+            System.out.println("Ubicación: " + origen);
+
+            if (conexiones.isEmpty()) {
+                System.out.println("No hay conexiones");
+            } else {
+                for (Arista arista : conexiones) {
+                    System.out.println(" -> " + arista.getDestino() +
+                            " (Distancia: " + arista.getPeso() + " )");
+                }
+            }
+        }
+    }
 }
