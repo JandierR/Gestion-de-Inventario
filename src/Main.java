@@ -5,10 +5,12 @@ import java.io.InputStreamReader;
 public class Main {
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     static ListaProductos listaProductos = new ListaProductos();
-    static Tienda tienda = new Tienda();
+    static Tienda tienda = new Tienda("MasXMenos");
     static ColaClientes colaClientes = new ColaClientes();
 
     public static void main(String[] args) throws IOException {
+
+
         int opcion;
 
         do {
@@ -32,6 +34,8 @@ public class Main {
                 7- Insertar cliente a la cola
                 8- Atender cliente
                 9- Insertar nodo final
+                10- Agregar conexion
+                11- Agregar ubicacion
                 0- Salir""");
         System.out.println();
 
@@ -50,8 +54,10 @@ public class Main {
             case 5 -> listaProductos.agregarImagenProducto();
             case 6 -> tienda.agregarProducto();
             case 7 -> colaClientes.insertarCliente();
-            case 8 -> ColaClientes.atenderCliente();
+            case 8 -> ColaClientes.atenderCliente(tienda.getMapa(), tienda.getUbicacion());
             case 9 -> listaProductos.insertarProductoFinal();
+            case 10 -> tienda.agregarArista();
+            case 11 -> tienda.agregarVertice();
             case 0 -> System.out.println("Saliendo del sistema...");
             default -> System.out.println("Valor invalido");
         }

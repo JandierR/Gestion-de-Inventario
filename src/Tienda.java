@@ -14,6 +14,11 @@ public class Tienda {
         colaClientes = new ColaClientes();
         mapa = new Grafo();
         this.ubicacion = ubicacion;
+
+        mapa.agregarArista(ubicacion, "San José", 11);
+        mapa.agregarArista("San José", "Heredia", 10);
+        mapa.agregarArista("Heredia", "Alajuela", 23);
+        mapa.agregarArista("San José", "Cartago", 39);
     }
 
     public void agregarCliente() throws IOException {
